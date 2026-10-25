@@ -29,6 +29,22 @@ Each plugin groups related skills. Add `agents/`, `commands/`, `hooks/` or `.mcp
 3. Register the plugin in `.claude-plugin/marketplace.json`.
 4. Run `claude plugin validate .`
 
+## Optional: let `sitrep` open the report
+
+Opening apps is blocked inside the Claude Code sandbox, so `sitrep` prints the path and a `! open "<path>/index.html"` line to run yourself. To let it open the report directly, add this to your own `~/.claude/settings.json` (nothing in this repo applies it):
+
+```json
+{
+  "sandbox": { "excludedCommands": ["open */sitrep.*/index.html"] },
+  "permissions": { "allow": ["Bash(open */sitrep.*/index.html)"] }
+}
+```
+
+- `sandbox.excludedCommands` runs matching commands outside the sandbox; the allow rule skips the prompt.
+- The pattern is deliberately narrow. `open *` would run anything starting with `open` with full access.
+- Patterns match the command text, so this is not airtight: extra arguments can still match the wildcard.
+- On Linux use `xdg-open` instead of `open`.
+
 ## Plugins
 
 | Plugin | Description |
