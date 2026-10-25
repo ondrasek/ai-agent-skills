@@ -9,7 +9,7 @@ Personal collection of AI agent skills, packaged as a [Claude Code plugin market
 /plugin install <plugin>@ondrasek-skills
 ```
 
-On Claude Code 2.1.275+ this works in one step, e.g. `/plugin install one-at-a-time --marketplace ondrasek/ai-agent-skills`
+On Claude Code 2.1.275+ this works in one step, e.g. `/plugin install oaat --marketplace ondrasek/ai-agent-skills`
 
 ## Layout
 
@@ -24,7 +24,7 @@ Each plugin groups related skills. Add `agents/`, `commands/`, `hooks/` or `.mcp
 
 ## Adding a plugin
 
-1. Copy an existing plugin (e.g. `plugins/one-at-a-time`) to `plugins/<name>` and edit `plugin.json`.
+1. Copy an existing plugin (e.g. `plugins/oaat`) to `plugins/<name>` and edit `plugin.json`.
 2. Add skills under `plugins/<name>/skills/<skill>/SKILL.md`.
 3. Register the plugin in `.claude-plugin/marketplace.json`.
 4. Run `claude plugin validate .`
@@ -33,4 +33,4 @@ Each plugin groups related skills. Add `agents/`, `commands/`, `hooks/` or `.mcp
 
 | Plugin | Description |
 | --- | --- |
-| `one-at-a-time` | Walks through pending decisions, questions and risks strictly one at a time (ADHD-friendly). |
+| `oaat` | Walks through pending decisions, questions and risks strictly one at a time (ADHD-friendly). Invoke with `/oaat` or `/oaat:oaat`. |

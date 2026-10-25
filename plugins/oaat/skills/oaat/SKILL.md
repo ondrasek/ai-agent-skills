@@ -1,9 +1,9 @@
 ---
-name: one-at-a-time
+name: oaat
 description: Use when there are several items waiting on the user (decisions, open questions, clarifications, concerns, risks) or when the user asks to go through them, "walk me through", "what's pending", or "one at a time". Presents and discusses each item strictly one at a time instead of dumping a list.
 ---
 
-# One at a time
+# OAAT (one at a time)
 
 Address everything waiting on the user without overwhelming them. The user has ADHD: limited working memory, easily overloaded by lists. Never show more than one open item at once.
 
