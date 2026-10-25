@@ -20,7 +20,7 @@
       "name": "sitrep",
       "source": "./plugins/sitrep",
       "description": "Turn all open items, risks and concerns into a temporary visual HTML situation report (priority matrix, dependency map, cards), built for visual thinkers with ADHD.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "category": "productivity"
     }
   ]

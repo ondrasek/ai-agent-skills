@@ -37,3 +37,5 @@ Notes:
 - Items are numbered `#1`, `#2`, ... by priority (impact x urgency), parked last. Numbers appear in the matrix, map and cards, so refer to items by them in chat.
 - Unknown `dependsOn` ids and self-references are ignored; cycles are tolerated.
 - Valid JavaScript, not JSON: write it as `window.SITREP = {...};`.
+- Keep `id`s stable when regenerating into the same `DIR`: the page stores comments and resolved flags per `id` in the browser.
+- The report exports feedback as `{"sitrep", "exported", "for_claude", "items": [{"id", "n", "title", "comment"?, "resolved"?}]}`.

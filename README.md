@@ -50,4 +50,4 @@ Opening apps is blocked inside the Claude Code sandbox, so `sitrep` prints the p
 | Plugin | Description |
 | --- | --- |
 | `oaat` | Walks through pending decisions, questions and risks strictly one at a time (ADHD-friendly). Invoke with `/oaat` or `/oaat:oaat`. |
-| `sitrep` | Builds a temporary, self-contained HTML situation report (priority matrix, dependency map, cards) of everything open. Invoke with `/sitrep` or `/sitrep:sitrep`. Output goes to a temp dir and is deleted on request. |
+| `sitrep` | Builds a temporary, self-contained HTML situation report of everything open (Focus / Matrix / Map / All tabs). Add comments per item in the page, then **Copy JSON** and paste it back into Claude. Invoke with `/sitrep` or `/sitrep:sitrep`. Output goes to a temp dir and is deleted on request. |

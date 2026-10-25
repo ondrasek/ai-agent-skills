@@ -1,11 +1,11 @@
 ---
 name: sitrep
-description: Use when the user wants a visual overview, big picture, map, dashboard or situation report of everything that is open (decisions, questions, risks, concerns, blockers, dependencies), or says "show me the situation", "what's the state of things", "visualize this". Builds a temporary HTML report instead of a text list.
+description: Use when the user wants a visual overview, big picture, map, dashboard or situation report of everything that is open (decisions, questions, risks, concerns, blockers, dependencies), or says "show me the situation", "what's the state of things", "visualize this", or pastes JSON feedback copied from a sitrep report. Builds a temporary HTML report instead of a text list.
 ---
 
 # Sitrep
 
-Show the whole situation at a glance for a visual thinker with ADHD. Output is a temporary, self-contained HTML page: summary tiles, a "start here" card, a priority matrix, a dependency map and expandable cards. It is never committed and is deleted when no longer needed.
+Show the whole situation at a glance for a visual thinker with ADHD. Output is a temporary, self-contained HTML page: a "start here" card and tabs (Focus with the top 3 items, Matrix, Map, All). Every card has a comment box and a Resolved checkbox, and a "Copy JSON" button exports the feedback for pasting back here. It is never committed and is deleted when no longer needed.
 
 ## 1. Collect silently
 
@@ -31,8 +31,17 @@ Try to open it: `open "DIR/index.html"` (macOS), `xdg-open` (Linux) or `start` (
 ! open "DIR/index.html"
 ```
 
-Then give a 2 to 3 line spoken summary of the situation (counts, the "start here" item) and offer to walk through the items one at a time if they have an `oaat`-style flow available. Do not paste the item list into chat.
+Then give a 2 to 3 line spoken summary of the situation (counts, the "start here" item), and tell them they can write comments on items in the page and press **Copy JSON** to paste them back here. Do not paste the item list into chat.
 
-## 4. Clean up
+## 4. Read pasted feedback
+
+The user may paste JSON from the report's **Copy JSON** button: `{"sitrep": "...", "for_claude": "...", "items": [{"id", "n", "title", "comment", "resolved"}]}`. Only items they commented on or resolved are included. When you see it:
+
+- Treat each `comment` as the user's answer or thoughts on the item with that `id`. Refer to items by number and title.
+- Answer briefly per item: what you will do or have done. Ask a follow-up only where a comment is unclear, one question at a time.
+- Apply decisions you can apply. Treat `resolved: true` as settled and do not reopen it.
+- Then offer to regenerate the report: overwrite `DIR/data.js` in the same directory if it still exists, drop settled items, add new items the comments raised, and keep every surviving `id` unchanged. The page remembers comments by `id` in the browser, so stable ids keep unsent comments in place.
+
+## 5. Clean up
 
 When the user says they are done, or the session ends, delete the report: `"${CLAUDE_SKILL_DIR}/scripts/report.sh" clean DIR`. The script refuses to delete anything that is not a `sitrep.*` directory directly under the temp dir. If the user answers or resolves items, offer to regenerate the report rather than editing it by hand.
