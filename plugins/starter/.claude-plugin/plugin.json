@@ -1,9 +1,0 @@
-{
-  "name": "starter",
-  "description": "Placeholder plugin with a skill template. Copy it to start a new skill, then remove it.",
-  "version": "0.1.0",
-  "author": {
-    "name": "Ondrej Krajicek",
-    "url": "https://github.com/ondrasek"
-  }
-}
