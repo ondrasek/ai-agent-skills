@@ -9,7 +9,7 @@ Personal collection of AI agent skills, packaged as a [Claude Code plugin market
 /plugin install <plugin>@ondrasek-skills
 ```
 
-On Claude Code 2.1.275+ this works in one step, e.g. `/plugin install oaat --marketplace ondrasek/ai-agent-skills`
+On Claude Code 2.1.275+ this works in one step, e.g. `/plugin install oaat --marketplace ondrasek/ai-agent-skills` or `/plugin install sitrep --marketplace ondrasek/ai-agent-skills`
 
 ## Layout
 
@@ -34,3 +34,4 @@ Each plugin groups related skills. Add `agents/`, `commands/`, `hooks/` or `.mcp
 | Plugin | Description |
 | --- | --- |
 | `oaat` | Walks through pending decisions, questions and risks strictly one at a time (ADHD-friendly). Invoke with `/oaat` or `/oaat:oaat`. |
+| `sitrep` | Builds a temporary, self-contained HTML situation report (priority matrix, dependency map, cards) of everything open. Invoke with `/sitrep` or `/sitrep:sitrep`. Output goes to a temp dir and is deleted on request. |

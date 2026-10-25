@@ -15,6 +15,13 @@
       "description": "Walk through pending decisions, questions, concerns and risks strictly one at a time, without overwhelming the user.",
       "version": "0.1.0",
       "category": "productivity"
+    },
+    {
+      "name": "sitrep",
+      "source": "./plugins/sitrep",
+      "description": "Turn all open items, risks and concerns into a temporary visual HTML situation report (priority matrix, dependency map, cards), built for visual thinkers with ADHD.",
+      "version": "0.1.0",
+      "category": "productivity"
     }
   ]
 }
