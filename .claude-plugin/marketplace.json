@@ -1,0 +1,20 @@
+{
+  "name": "ondrasek-skills",
+  "owner": {
+    "name": "Ondrej Krajicek",
+    "url": "https://github.com/ondrasek"
+  },
+  "metadata": {
+    "description": "Personal collection of AI agent skills, mostly for Claude Code.",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "starter",
+      "source": "./plugins/starter",
+      "description": "Placeholder plugin with a skill template. Copy it to start a new skill, then remove it.",
+      "version": "0.1.0",
+      "category": "template"
+    }
+  ]
+}
