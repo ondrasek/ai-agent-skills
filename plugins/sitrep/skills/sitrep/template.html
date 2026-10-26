@@ -101,7 +101,9 @@
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; }
   .card.flash { outline: 3px solid var(--focus); }
   .card.done .ttl { text-decoration: line-through; color: var(--ink2); }
-  .card.done { opacity: .6; }
+  .card.done { background: transparent; border-style: dashed; }
+  .card.done .glyph, .card.done .num { opacity: .55; }
+  .tag.ok { border-color: var(--ink2); color: var(--ink); font-weight: 600; }
   .card header { display: flex; gap: 10px; align-items: flex-start; }
   .num { font-weight: 700; color: var(--ink2); min-width: 1.6em; }
   .ttl { font-weight: 600; font-size: 17px; flex: 1; }
@@ -331,7 +333,7 @@
         active.filter(function (i) { return i.impact === this.imp && i.urgency === this.urg && i.status !== "parked"; }, { imp: imp, urg: urg })
           .sort(function (a, b) { return a.n - b.n; }).forEach(function (i) {
             cell.appendChild(h("button", { class: "dot ty-" + i.type + (i.done ? " done" : ""), title: TYPES[i.type].label + ": " + i.title,
-              onclick: function () { jump(i.id); } }, glyph(i.type), "#" + i.n));
+              onclick: function () { jump(i.id); } }, glyph(i.type), "#" + i.n + (i.done ? " \u2713" : "")));
           });
         m.appendChild(cell);
       }
@@ -361,12 +363,18 @@
     })));
     var body = h("div", { class: "tabbody" });
     if (view === "focus") {
-      var top = sorted.filter(function (i) { return i.visible && !i.done && i.status !== "parked"; }).slice(0, 3);
-      body.appendChild(h("p", { class: "muted", style: "margin-bottom:12px" }, top.length ? "Your top " + top.length + ". Nothing else needs your attention yet." : "Nothing open. "));
+      // Top 3 open items in priority order; resolved items stay in place (never hidden, never reshuffled).
+      var ranked = sorted.filter(function (i) { return i.visible && i.status !== "parked"; });
+      var top = [], openN = 0;
+      for (var k = 0; k < ranked.length && openN < 3; k++) { top.push(ranked[k]); if (!ranked[k].done) openN++; }
+      var doneN = top.length - openN;
+      body.appendChild(h("p", { class: "muted", style: "margin-bottom:12px" }, openN
+        ? "Your top " + openN + " open" + (doneN ? ", plus " + doneN + " resolved" : "") + ". Nothing else needs your attention yet."
+        : "Nothing open."));
       var cs = h("div", { class: "cards" });
       top.forEach(function (i) { var c = card(i), d = c.querySelector("details"); if (d) d.open = true; cs.appendChild(c); });
       body.appendChild(cs);
-      var more = live.length - top.length;
+      var more = live.length - openN;
       if (more > 0) body.appendChild(h("p", { style: "margin-top:12px" }, h("button", { class: "theme", onclick: function () { view = "all"; render(); } }, more + " more in All")));
     } else if (view === "matrix") {
       body.appendChild(matrixEl(active));
@@ -386,6 +394,7 @@
   function card(i) {
     var tags = [h("span", { class: "tag" }, "Impact: " + LEVEL[i.impact]), h("span", { class: "tag" }, "Urgency: " + LEVEL[i.urgency])];
     if (i.status === "blocked") tags.unshift(h("span", { class: "tag" }, "■ Blocked"));
+    if (i.done) tags.unshift(h("span", { class: "tag ok" }, "\u2713 Resolved"));
     if (i.owner) tags.push(h("span", { class: "tag" }, "Owner: " + i.owner));
     if (i.deps.length) tags.push(h("span", { class: "tag" }, "Waits on " + i.deps.map(function (d) { return "#" + byId[d].n; }).join(", ")));
     var body = [];
